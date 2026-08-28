@@ -2,9 +2,12 @@
 
 import Link from "next/link";
 import { FormEvent, useState } from "react";
+import { useRouter } from "next/navigation";
 import { apiFetch } from "@/lib/api";
 
 export default function SignupPage() {
+  const router = useRouter();
+
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -19,7 +22,7 @@ export default function SignupPage() {
     setError("");
 
     try {
-      const data = await apiFetch("/auth/signup", {
+      await apiFetch("/auth/signup", {
         method: "POST",
         body: JSON.stringify({
           name,
@@ -28,7 +31,7 @@ export default function SignupPage() {
         }),
       });
 
-      setMessage(data.message || "Signup successful");
+      router.push("/dashboard");
     } catch (error) {
       setError(error instanceof Error ? error.message : "Something went wrong");
     }
