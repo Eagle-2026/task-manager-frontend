@@ -41,7 +41,14 @@ export default function Home() {
           </Link>
 
           {/* Navigation */}
-          {!checkingAuth && (
+          {/* Navigation */}
+          {checkingAuth ? (
+            // Show skeleton while checking authentication
+            <div className="flex items-center gap-3">
+              <div className="h-10 w-16 animate-pulse rounded-lg bg-slate-300" />
+              <div className="h-10 w-20 animate-pulse rounded-lg bg-slate-300" />
+            </div>
+          ) : (
             <div className="flex items-center gap-3">
               {/* Logged Out */}
               {!isLoggedIn && (
