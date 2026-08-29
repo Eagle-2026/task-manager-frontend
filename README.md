@@ -1,8 +1,8 @@
 # Task Manager Frontend
 
-A modern full-stack Task Manager frontend built with Next.js, TypeScript, React, and Tailwind CSS.
+A full-stack Task Manager frontend built with Next.js, TypeScript, React, and Tailwind CSS.
 
-The frontend provides user authentication, protected routes, dashboard functionality, task management, form validation, and integration with a RESTful backend API.
+The frontend provides user registration, login, logout, protected routes, dashboard functionality, task management, client-side search/filter/sort functionality, loading and error states, and integration with a RESTful Express backend API.
 
 ## Features
 
@@ -11,16 +11,20 @@ The frontend provides user authentication, protected routes, dashboard functiona
 * User logout
 * Authentication state handling
 * Protected routes
+* Automatic redirect to the login page for unauthenticated users
 * Dashboard
 * Task creation
 * Task listing
 * Task updating
 * Task deletion
-* Task filtering
-* Task sorting
-* Pagination support
-* Form validation
-* Loading and error states
+* Search tasks by title or description
+* Filter tasks by status
+* Sort tasks by newest, oldest, or title
+* Form state management
+* Loading states
+* Error handling
+* Confirmation dialog before task deletion
+* Toast notifications
 * REST API integration
 * Responsive user interface
 
@@ -30,10 +34,10 @@ The frontend provides user authentication, protected routes, dashboard functiona
 * React
 * TypeScript
 * Tailwind CSS
-* React Hook Form
-* Zod
-* REST API
+* TanStack React Query
 * Fetch API
+* Lucide React
+* Sonner
 
 ## Application Architecture
 
@@ -46,7 +50,7 @@ Next.js UI
   ↓
 React Components
   ↓
-API Utility
+Custom Hooks / API Utility
   ↓
 REST API
   ↓
@@ -55,13 +59,13 @@ Express Backend
 MongoDB
 ```
 
-The backend handles authentication, authorization, data validation, and database operations while the frontend is responsible for the user interface and client-side application flow.
+The backend handles authentication, authorization, validation, and database operations while the frontend handles the user interface, client-side state, and application interactions.
 
 ## Authentication
 
-Authentication is handled through the backend API using JWT-based authentication with HttpOnly cookies.
+Authentication is handled by the backend using JWT-based authentication with HttpOnly cookies.
 
-The frontend sends authenticated requests with credentials enabled so that the browser can include the authentication cookie.
+The frontend sends authenticated requests with credentials enabled so the browser can include the authentication cookie.
 
 ```text
 Login
@@ -79,44 +83,87 @@ Frontend redirects to Dashboard
 Protected API requests
 ```
 
-The frontend includes protected routes to prevent unauthenticated users from accessing protected application pages.
+The frontend uses a protected route component to verify authentication before displaying protected pages.
 
-## Pages
+```text
+Protected Route
+      ↓
+GET /api/users/me
+      ↓
+Authenticated?
+   ↙       ↘
+ Yes        No
+  ↓          ↓
+Show Page   Redirect
+            /login
+```
 
-### Home
+## Dashboard
 
-Provides the main entry point to the application.
+The dashboard displays:
 
-### Signup
+* Authenticated user's name
+* Total tasks
+* Completed tasks
+* Pending tasks
+* Navigation to the Tasks page
+* Logout functionality
 
-Allows new users to create an account.
+Task statistics are calculated from the tasks loaded for the authenticated user.
 
-### Login
+## Task Management
 
-Allows existing users to authenticate.
+The Tasks page allows users to:
 
-### Dashboard
+* Create tasks
+* View tasks
+* Edit tasks
+* Delete tasks
+* Search tasks
+* Filter tasks
+* Sort tasks
 
-Displays authenticated user information and task-related information.
+### Search
 
-### Tasks
+Tasks can be searched by:
 
-Provides the main task management interface.
+* Title
+* Description
 
-Users can create, view, update, delete, filter, and sort tasks.
+Search is performed on the tasks loaded into the frontend.
 
-## Components
+### Filtering
 
-The application uses reusable React components to separate UI responsibilities.
+Users can filter tasks by:
+
+* All Tasks
+* Pending
+* Completed
+
+### Sorting
+
+Users can sort tasks by:
+
+* Newest First
+* Oldest First
+* Title A-Z
+
+## Data Fetching & Mutations
+
+TanStack React Query is used for task data fetching and mutations.
+
+The application uses custom hooks to separate API/data logic from UI components.
 
 Examples include:
 
-* `ProtectedRoute`
-* `DashboardContent`
-* `TasksContent`
-* `TaskForm`
+```text
+useTasks()
+useCreateTask()
+useUpdateTask()
+useDeleteTask()
+```
 
-This component-based structure makes the frontend easier to maintain and extend.
+This keeps task-related server state logic separate from the presentation components.
 
 ## API Integration
 
@@ -136,29 +183,37 @@ PATCH /api/tasks/:id
 DELETE /api/tasks/:id
 ```
 
-Authenticated requests include credentials so the browser can send the HttpOnly authentication cookie to the backend.
+Authenticated requests use:
 
-## Task Management
+```text
+credentials: "include"
+```
 
-The Tasks interface allows authenticated users to:
+so the browser can send the HttpOnly authentication cookie with requests.
 
-* Create tasks
-* View tasks
-* Update tasks
-* Delete tasks
-* Filter tasks by completion status
-* Sort tasks
-* Work with paginated task results
+## Form Handling
 
-The frontend communicates with the backend API to persist task data.
+Task forms use React state to manage:
 
-## Form Validation
+* Title
+* Description
+* Completed status
 
-Forms use client-side validation to provide immediate feedback to users.
+The form supports both creating and editing tasks.
 
-Validation schemas are defined using Zod, while React Hook Form manages form state and submission.
+The frontend also displays loading and error states during task mutations.
 
-This provides structured validation before requests are sent to the backend.
+## User Experience
+
+The application provides feedback during user interactions through:
+
+* Loading skeletons
+* Error messages
+* Confirmation dialogs
+* Toast notifications
+* Disabled buttons during pending operations
+
+For example, deleting a task requires confirmation before the delete request is sent.
 
 ## Project Structure
 
@@ -176,13 +231,16 @@ task-manager-frontend/
 │   ├── auth/
 │   ├── dashboard/
 │   ├── tasks/
+│   ├── ui/
 │   └── Other reusable components
 │
 ├── hooks/
-│   └── Custom React hooks
+│   ├── Task data hooks
+│   ├── Task mutation hooks
+│   └── Other custom hooks
 │
 ├── lib/
-│   └── API and utility functions
+│   └── API utility functions
 │
 ├── public/
 │   └── Static assets
@@ -194,6 +252,7 @@ task-manager-frontend/
 ├── package.json
 ├── package-lock.json
 ├── next.config.ts
+├── tsconfig.json
 └── README.md
 ```
 
@@ -237,7 +296,7 @@ Start the development server:
 npm run dev
 ```
 
-The frontend will run on the local development server provided by Next.js.
+The frontend will run on the local Next.js development server.
 
 ## Backend
 
@@ -247,13 +306,13 @@ This frontend communicates with the Task Manager REST API.
 
 ## Related Project
 
-This project is part of a full-stack Task Manager application consisting of:
+This project is part of a full-stack Task Manager application consisting of two repositories.
 
-**Frontend**
+### Frontend
 
-Next.js + TypeScript + Tailwind CSS
+Next.js + TypeScript + Tailwind CSS + TanStack React Query
 
-**Backend**
+### Backend
 
 Node.js + Express + MongoDB + Mongoose
 
@@ -262,7 +321,7 @@ Frontend
    ↓
 REST API
    ↓
-Backend
+Express Backend
    ↓
 MongoDB
 ```
@@ -270,8 +329,10 @@ MongoDB
 ## Future Improvements
 
 * Automated frontend testing
-* Improved accessibility
+* API error handling improvements
+* Enhanced accessibility
 * Additional task management features
-* Enhanced dashboard analytics
-* More advanced filtering and search
-* Improved error and loading experiences
+* Dashboard analytics
+* Server-side task pagination integration
+* More advanced search and filtering
+* Improved loading and error experiences
