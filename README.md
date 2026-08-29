@@ -22,7 +22,7 @@ The frontend provides user registration, login, logout, protected routes, dashbo
 
 [View Dashboard Screenshot](https://github.com/Eagle-2026/task-manager-frontend/blob/main/public/screenshots/dashboard.png)
 
-### Add Task
+### After Adding Task
 
 [View Add Task Screenshot](https://github.com/Eagle-2026/task-manager-frontend/blob/main/public/screenshots/addTask.png)
 
