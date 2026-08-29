@@ -3,39 +3,41 @@
 A full-stack Task Manager frontend built with Next.js, TypeScript, React, and Tailwind CSS.
 
 The frontend provides user registration, login, logout, protected routes, dashboard functionality, task management, client-side search/filter/sort functionality, loading and error states, and integration with a RESTful Express backend API.
+
 ## Screenshots
 
 ### Home Page
 
-![Home Page](./screenshots/homePage.png)
+[View Home Page Screenshot](https://github.com/Eagle-2026/task-manager-frontend/blob/main/public/screenshots/homePage.png)
 
 ### Login
 
-![Login](./screenshots/login.png)
+[View Login Screenshot](https://github.com/Eagle-2026/task-manager-frontend/blob/main/public/screenshots/login.png)
 
-### Sign Up
+### Signup
 
-![Sign Up](./screenshots/signup.png)
+[View Signup Screenshot](https://github.com/Eagle-2026/task-manager-frontend/blob/main/public/screenshots/signup.png)
 
 ### Dashboard
 
-![Dashboard](./screenshots/dashboard.png)
+[View Dashboard Screenshot](https://github.com/Eagle-2026/task-manager-frontend/blob/main/public/screenshots/dashboard.png)
 
-### Adding a Task
+### Add Task
 
-![Adding a Task](./screenshots/addTask.png)
+[View Add Task Screenshot](https://github.com/Eagle-2026/task-manager-frontend/blob/main/public/screenshots/addTask.png)
 
-### Editing a Task
+### Edit Task
 
-![Editing a Task](./screenshots/editTask.png)
+[View Edit Task Screenshot](https://github.com/Eagle-2026/task-manager-frontend/blob/main/public/screenshots/editTask.png)
 
-### Deleting a Task
+### Delete Task
 
-![Deleting a Task](./screenshots/deleteTask.png)
+[View Delete Task Screenshot](https://github.com/Eagle-2026/task-manager-frontend/blob/main/public/screenshots/deleteTask.png)
 
-### Logging Out
+### Logout
 
-![Logging Out](./screenshots/logOut.png)
+[View Logout Screenshot](https://github.com/Eagle-2026/task-manager-frontend/blob/main/public/screenshots/logOut.png)
+
 
 
 ## Features
