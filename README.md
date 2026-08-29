@@ -3,17 +3,19 @@
 A full-stack Task Manager frontend built with Next.js, TypeScript, React, and Tailwind CSS.
 
 The frontend provides user registration, login, logout, protected routes, dashboard functionality, task management, client-side search/filter/sort functionality, loading and error states, and integration with a RESTful Express backend API.
-
-## Screenshots
 ## Screenshots
 
 ### Home Page
 
 ![Home Page](./screenshots/homePage.png)
 
+### Login
+
+![Login](./screenshots/login.png)
+
 ### Sign Up
 
-![Sign Up](./screenshots/SIGNUP.png)
+![Sign Up](./screenshots/signup.png)
 
 ### Dashboard
 
@@ -21,7 +23,7 @@ The frontend provides user registration, login, logout, protected routes, dashbo
 
 ### Adding a Task
 
-![Adding a Task](./screenshots/adding-task.png)
+![Adding a Task](./screenshots/addTask.png)
 
 ### Editing a Task
 
@@ -29,7 +31,7 @@ The frontend provides user registration, login, logout, protected routes, dashbo
 
 ### Deleting a Task
 
-![Deleting a Task](./screenshots/deleteTAsk.png)
+![Deleting a Task](./screenshots/deleteTask.png)
 
 ### Logging Out
 
