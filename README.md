@@ -39,6 +39,11 @@ The frontend provides user registration, login, logout, protected routes, dashbo
 [View Logout Screenshot](https://github.com/Eagle-2026/task-manager-frontend/blob/main/public/screenshots/logOut.png)
 
 
+## Live Demo
+
+[View Live Application](https://task-manager-frontend-xi-kohl.vercel.app)
+
+
 
 ## Features
 
