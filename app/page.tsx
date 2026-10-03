@@ -7,7 +7,6 @@ import LogoutButton from "@/components/auth/LogoutButton";
 
 export default function Home() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [checkingAuth, setCheckingAuth] = useState(true);
 
   useEffect(() => {
     async function checkAuthentication() {
@@ -16,8 +15,6 @@ export default function Home() {
         setIsLoggedIn(true);
       } catch {
         setIsLoggedIn(false);
-      } finally {
-        setCheckingAuth(false);
       }
     }
 
@@ -41,49 +38,40 @@ export default function Home() {
           </Link>
 
           {/* Navigation */}
-          {/* Navigation */}
-          {checkingAuth ? (
-            // Show skeleton while checking authentication
-            <div className="flex items-center gap-3">
-              <div className="h-10 w-16 animate-pulse rounded-lg bg-slate-300" />
-              <div className="h-10 w-20 animate-pulse rounded-lg bg-slate-300" />
-            </div>
-          ) : (
-            <div className="flex items-center gap-3">
-              {/* Logged Out */}
-              {!isLoggedIn && (
-                <>
-                  <Link
-                    href="/login"
-                    className="rounded-lg px-4 py-2 font-medium text-slate-700 transition hover:bg-white hover:text-gray-900"
-                  >
-                    Login
-                  </Link>
+          <div className="flex items-center gap-3">
+            {/* Logged Out */}
+            {!isLoggedIn && (
+              <>
+                <Link
+                  href="/login"
+                  className="rounded-lg px-4 py-2 font-medium text-slate-700 transition hover:bg-white hover:text-gray-900"
+                >
+                  Login
+                </Link>
 
-                  <Link
-                    href="/signup"
-                    className="rounded-lg bg-gray-900 px-4 py-2 font-medium text-white shadow-sm transition hover:bg-gray-800"
-                  >
-                    Register
-                  </Link>
-                </>
-              )}
+                <Link
+                  href="/signup"
+                  className="rounded-lg bg-gray-900 px-4 py-2 font-medium text-white shadow-sm transition hover:bg-gray-800"
+                >
+                  Register
+                </Link>
+              </>
+            )}
 
-              {/* Logged In */}
-              {isLoggedIn && (
-                <>
-                  <Link
-                    href="/dashboard"
-                    className="rounded-lg px-4 py-2 font-medium text-slate-700 transition hover:bg-white hover:text-gray-900"
-                  >
-                    Dashboard
-                  </Link>
+            {/* Logged In */}
+            {isLoggedIn && (
+              <>
+                <Link
+                  href="/dashboard"
+                  className="rounded-lg px-4 py-2 font-medium text-slate-700 transition hover:bg-white hover:text-gray-900"
+                >
+                  Dashboard
+                </Link>
 
-                  <LogoutButton className="rounded-lg bg-red-600 px-4 py-2 font-medium text-white shadow-sm transition hover:bg-red-700" />
-                </>
-              )}
-            </div>
-          )}
+                <LogoutButton className="rounded-lg bg-red-600 px-4 py-2 font-medium text-white shadow-sm transition hover:bg-red-700" />
+              </>
+            )}
+          </div>
         </div>
       </nav>
 
@@ -108,8 +96,8 @@ export default function Home() {
               progress, and stay focused on what matters.
             </p>
 
-            {/* Get Started - Only Logged Out */}
-            {!checkingAuth && !isLoggedIn && (
+            {/* Get Started - Logged Out */}
+            {!isLoggedIn && (
               <div className="mt-8">
                 <Link
                   href="/signup"
