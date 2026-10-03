@@ -40,6 +40,13 @@ export default function SignupPage() {
   return (
     <main className="flex min-h-screen items-center justify-center bg-gray-200 px-4">
       <div className="w-full max-w-md">
+        <Link
+          href="/"
+          className="mb-6 inline-flex items-center text-sm font-medium text-gray-600 transition hover:text-gray-900"
+        >
+          ← Back to Home
+        </Link>
+
         <div className="mb-8 text-center">
           <h1 className="text-4xl font-bold tracking-tight text-gray-900">
             Create your account
